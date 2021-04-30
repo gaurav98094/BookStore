@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+  SEARCH
+{% endblock %}
+
+{% block content %}
+
+
+
+  <section id="showcase" style="background-image: url({% static 'img/book-search.jpg' %});">
+    <div class="container text-center">
+      <div class="home-search p-5">
+        <div class="overlay p-5" style="border-radius: 50px;">
+          <h1 class="display-4 mb-4">
+            Let's Make Book Search Easy
+          </h1>
+          <p class="lead">Search Your favouriate Book here Easily.</p><br>
+          <div class="search">
+            <form action="{% url 'search' %}">  
+              
+              <!-- Form Row 1 -->
+              <div class="form-row">
+                <div class="col-md-6 mb-6">
+                  <label class="sr-only">book_name</label>
+                  <input type="text" name="book_name" class="form-control" {% if book_name %} value="{{book_name}}" {% else %} placeholder="Book Name" {% endif %}>
+                </div>
+
+                <div class="col-md-6 mb-6">
+                  <label class="sr-only">isbn</label>
+                  <input type="text" name="isbn" class="form-control" {% if isbn %} value="{{isbn}}" {% else %} placeholder="ISBN Number." {% endif %}>
+                </div>
+
+                
+              </div>
+              <br>
+              
+              <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+    <!-- Breadcrumb -->
+    <section id="bc" class="mt-3">
+        <div class="container">
+          <nav>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="{% url 'index' %}">Home</a>
+              </li>
+              
+              <li class="breadcrumb-item active">Search Results</li>
+            </ol>
+          </nav>
+        </div>
+      </section>
+
+
+
+
+
+
+  
+  <!-- Listings -->
+  <section id="listings" class="py-2">
+    <div class="container">
+      <h3 class="text-center mb-5">Searched Books</h3>
+      <div class="row">
+
+
+        <!-- Listings -->
+        {% if books %}
+          
+          {% for book in books %}
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card listing-preview">
+                <img class="card-img-top" src="{{book.photo_main.url}}" height="350px" alt="">
+                <div class="card-img-overlay">
+                  <h2>
+                    <span class="badge badge-secondary text-white">₹ {{book.price}}</span>
+                  </h2>
+                </div>
+                <div class="card-body">
+                  <div class="listing-heading text-center">
+                    <h4 class="text-primary">{{book.bname}}</h4>
+                  </div>
+                  <a href="{% url 'book' book.id %}" class="btn btn-primary btn-block">More Info</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+        {% else %}
+          <div class="col-md-12">No Books Available</div>
+        {% endif %}
+
+        
+        
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+{% endblock %}

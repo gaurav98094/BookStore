@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{% if user.is_authenticated %}
+Recommended Books
+{% else %}
+Books Available
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">You Are Special To Us</h1>
+          <p class="lead">So we Take Care Of Your Choices ...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- Listings -->
+  <section id="listings" class="py-5">
+    <div class="container">
+      <h3 class="text-center mb-3">{% if user.is_authenticated %}
+        RECOMMENDED BOOKS
+      {% else %}
+        BOOKS AVAILABLE
+      {% endif %}</h3>
+      <hr>
+      <div class="row">
+
+       
+        <!-- Listings -->
+        {% if books %}
+          
+          {% for book in books %}
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card listing-preview">
+                <img class="card-img-top" src="{{book.photo_main.url}}" height="350px" alt="">
+                <div class="card-img-overlay">
+                  <h2>
+                    <span class="badge badge-secondary text-white">₹ {{book.price}}</span>
+                  </h2>
+                </div>
+                <div class="card-body">
+                  <div class="listing-heading text-center">
+                    <h4 class="text-primary">{{book.bname.split.0}} {{book.bname.split.1}} {{book.bname.split.2}} {{book.bname.split.3}} ...  </h4>
+                  </div>
+                  <a href="{% url 'book' book.id %}" class="btn btn-primary btn-block">More Info</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+        {% else %}
+          <div class="col-md-12">Please Enquire for the first time. Then we will personalize.</div>
+        {% endif %}
+
+ 
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-md-12">
+
+        {% if books.has_other_pages %}
+          <ul class="pagination">    
+            {% if books.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{books.previous_page_number}}">&laquo;</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <a class="page-link">&laquo;</a>
+              </li>
+            {% endif %}
+
+
+            {% for i in books.paginator.page_range %}
+              {% if books.number == i %}
+                <li class="page-item active">
+                  <a class="page-link">{{i}}</a>
+                </li>
+              {% else %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{i}}">{{i}}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+
+            
+            {% if books.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{books.next_page_number}}">&raquo;</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <a class="page-link">&raquo;</a>
+              </li>
+            {% endif %}
+              
+        
+              
+              
+            </ul>
+        {% endif %}
+
+
+      </div>
+    </div>
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+{% endblock %}

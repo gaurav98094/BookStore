@@ -1,0 +1,30 @@
+#header{
+    background: #343a40;
+    color: white;
+}
+
+
+a:link,
+a:visited{
+    color: #343a40;
+}
+
+
+div.breadcrumbs{
+    background: rgb(148, 172, 112);
+    color: #10284e;
+}
+
+div.breadcrumbs a{
+    color: #333;
+}
+
+
+.module h2, .module caption, .inline-group h2{
+    background: rgb(148, 172, 112);
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button{
+    background: #343a40;
+    color: white
+}

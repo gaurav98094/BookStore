@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  DASHBOARD
+{% endblock %}
+
+{% load static %}
+{% block content %}
+
+{% csrf_token %}
+
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">User DashBoard</h1>
+          <p class="lead">Manage Your Account</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> Dashboard</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <div class="container">
+    {% include '_alerts.html' %}
+    </div>
+
+    
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Welcome {{user.first_name}}</h2>
+          <p>Here are the Books that you have inquired about</p>
+
+          {% if data %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Property</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+            {% for d in data %}
+              <tr>
+                <td>{{d.id}}</td>
+                <td>{{d.bname}}</td>
+                <td>
+                  <a class="btn btn-light" href="{% url 'book' d.book_id %}">View Book</a>
+                </td>
+              </tr>
+            {% endfor %}
+
+
+
+
+            </tbody>
+          </table>
+
+          {% else %}
+          <p> You have not made any contacts</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}

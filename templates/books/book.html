@@ -1,0 +1,283 @@
+ {% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+  BOOK INFO
+{% endblock %}
+
+{% block content %}
+
+ <section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{book.bname}}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">Home</a>
+          </li>
+          
+          <li class="breadcrumb-item active">{{ book.bname }}</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+
+
+
+<div class="container">
+  {% include '_alerts.html' %}
+</div>
+  
+
+  <section id="about" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <h2>We Search Good Books For You</h2>
+          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p>
+          <img src="{{book.photo_main.url}}" alt="" height="400px">
+
+
+      
+          
+
+
+
+          <div class="row mb-5">
+            <div class="col-md-12">
+              {{book.description}}
+            </div>
+          </div>
+
+
+
+          <h3>Comments</h3>
+            <div class="d-flex flex-column comment-section comm">
+                <div class="bg-white p-2">
+                    <div class="d-flex flex-row user-info">
+                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Marry Andrews</span>
+                          <span class="date text-black-50"> Jan 2020</span></div>
+                    </div>
+                    <div class="mt-2">
+                        <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-column comment-section comm">
+                <div class="bg-white p-2">
+                    <div class="d-flex flex-row user-info">
+                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Marry Andrews</span>
+                          <span class="date text-black-50"> Jan 2020</span></div>
+                    </div>
+                    <div class="mt-2">
+                        <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-column comment-section comm">
+                <div class="bg-white p-2">
+                    <div class="d-flex flex-row user-info">
+                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Marry Andrews</span>
+                          <span class="date text-black-50"> Jan 2020</span></div>
+                    </div>
+                    <div class="mt-2">
+                        <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+              </div>
+          
+
+              <!-- {% if user.is_authenticated %}
+              <br>
+
+              <form action="" method="POST">
+                <div class="form-group">
+                  <label for="message" class="col-form-label">Put Your Comment Here:</label>
+                  <textarea name="message" class="form-control"></textarea>
+                </div>
+                
+                <input type="submit" value="Post Comment" class="btn btn-block btn-secondary">
+              </form>
+              <br>
+
+              {% endif %} -->
+
+          
+          
+        </div>
+
+
+       <div class="col-md-4">
+         
+<!-- Fields -->
+<div>
+  <div>
+    <ul class="list-group list-group-flush mt-5">
+
+      <li class="list-group-item text-secondary">
+        <i class="fas fa-star "></i> Number of Enquiries:
+        <span class="float-right">{{book.number_of_enquiry}}</span>
+      </li>
+
+
+      <li class="list-group-item text-secondary">
+        <i class="fas fa-money-bill-alt"></i> Asking Price:
+        <span class="float-right">₹ {{book.price}}</span>
+      </li>
+
+      <li class="list-group-item text-secondary">
+        <i class="fas fa-list-ol"></i> ISBN Number :
+        <span class="float-right">{{book.isbn}}</span>
+      </li>
+
+      <li class="list-group-item text-secondary">
+        <i class="fas fa-square"></i> Genre:
+        <span class="float-right">{{book.genre1}}{% if book.genre2 %} ,{{book.genre2}} {% endif %} {% if book.genre3 %} , {{book.genre3}} {% endif %}
+        </span>
+      </li>
+
+      <li class="list-group-item text-secondary">
+        <i class="fas fa-user-alt"></i> Author:
+        <span class="float-right">{{book.writerName}}
+        </span>
+      </li>
+
+      <li class="list-group-item text-secondary">
+        <i class="fas fa-calendar"></i> Available Since:
+        <span class="float-right">{{book.list_date|date:'d/m/Y'}}</span>
+      </li>
+
+
+      <li class="list-group-item text-secondary">
+        <i class="fas fa-ticket-alt"></i> Book Status:
+        <span class="float-right">{% if book.is_published %}Available{% else %}Not Available{% endif %}
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div class="card mb-3">
+            <img class="card-img-top" src="{{book.seller.photo.url}}" alt="Book Seller">
+            <div class="card-body">
+              <h5 class="card-title">Book Seller</h5>
+              <h6 class="text-secondary">{{book.seller}}</h6>
+            </div>
+          </div>
+          <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
+        </div>
+
+
+
+      </div>
+    </div>
+  </section>
+
+
+ 
+
+
+
+
+  <!-- Inquiry Modal -->
+  <div class="modal fade" id="inquiryModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'contact' %}" method="POST">
+            {% csrf_token %}
+            
+            {% if user.is_authenticated %}
+              <input type="hidden" name="user_id" value="{{user.id}}">
+            {% else %}
+              <input type="hidden" name="user_id" value="0">
+            {% endif %}
+
+            <input type="hidden" name="bname" value="{{book.bname}}">
+            <input type="hidden" name="seller_email" value="{{book.seller.email}}">
+            <input type="hidden" name="book_id" value="{{book.id}}">
+
+
+
+            <div class="form-group">
+              <label for="property_name" class="col-form-label">Book Name:</label>
+              <input type="text"  class="form-control" value="{{book.bname}}" disabled>
+            </div>
+            <div class="form-group">
+              <label for="name" class="col-form-label">Name:</label>
+              
+              <input type="text" name="name" class="form-control" 
+              {% if user.is_authenticated %}
+                  value="{{user.first_name}} {{user.last_name}}"
+              {% endif %}
+              required>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="col-form-label">Email:</label>
+              <input type="email" name="email" class="form-control" 
+              {% if user.is_authenticated %}
+                  value="{{user.email}}"
+              {% endif %}
+              required>
+            </div>
+
+            <div class="form-group">
+              <label for="age" class="col-form-label">Age:</label>
+              <input type="number" name="age" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="phone" class="col-form-label">Phone:</label>
+              <input type="text" name="phone" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="message" class="col-form-label">Message:</label>
+              <textarea name="message" class="form-control"></textarea>
+            </div>
+            <hr>
+            <input type="submit" value="Send" class="btn btn-block btn-secondary">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% endblock %}

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+  HOME
+{% endblock %}
+
+{% block content %}
+
+
+
+  <section id="showcase" style="background-image: url({% static 'img/book-search.jpg' %});">
+    <div class="container text-center">
+      <div class="home-search p-5">
+        <div class="overlay p-5" style="border-radius: 50px;">
+          <h1 class="display-4 mb-4">
+            Let's Make Book Search Easy
+          </h1>
+          <p class="lead">Search Your favouriate Book here Easily.</p><br>
+          <div class="search">
+            <form action="{% url 'search' %}">
+              
+              <!-- Form Row 1 -->
+              <div class="form-row">
+                <div class="col-md-6 mb-6">
+                  <label class="sr-only">book_name</label>
+                  <input type="text" name="book_name" class="form-control" placeholder="Book Name">
+                </div>
+
+                <div class="col-md-6 mb-6">
+                  <label class="sr-only">isbn</label>
+                  <input type="text" name="isbn" class="form-control" placeholder="ISBN  No.">
+                </div>
+
+                
+              </div>
+              <br>
+              
+              <button class="btn btn-secondary btn-block mt-4" type="submit" >Submit form</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<br>
+<!-- ALERTS-->
+<div class="container">
+{% include '_alerts.html' %}
+</div>
+
+  
+  <!-- Listings -->
+  <section id="listings" class="py-5">
+    <div class="container">
+      <h3 class="text-center mb-5">Most Inquired Books</h3>
+      <div class="row">
+
+
+        <!-- Listings -->
+        {% if books %}
+          
+          {% for book in books %}
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card listing-preview">
+                <img class="card-img-top" src="{{book.photo_main.url}}" height="350px" alt="">
+                <div class="card-img-overlay">
+                  <h2>
+                    <span class="badge badge-secondary text-white">₹ {{book.price}}</span>
+                  </h2>
+                </div>
+                <div class="card-body">
+                  <div class="listing-heading text-center">
+                    <h4 class="text-primary">{{book.bname.split.0}} {{book.bname.split.1}} {{book.bname.split.2}} {{book.bname.split.3}} ...</h4>
+                  </div>
+                  <a href="{% url 'book' book.id %}" class="btn btn-primary btn-block">More Info</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+        {% else %}
+          <div class="col-md-12">No Books Available</div>
+        {% endif %}
+
+        
+        
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <section id="testimonials" class="p-5">
+    <div class="container">
+
+        <h2 class="l-heading" style="color:white;">What Our Guest Say?</h2>
+
+        <div class="testimonial" style="background:#fed8b1;">
+            <img src="{% static 'img/person-1.jpg' %}" alt="Samanta">
+            <p style="color: black;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga aliquid tempore distinctio excepturi quod consequatur sed asperiores consequuntur quia rem qui non, eligendi numquam reiciendis est repellendus! Eos, est laudantium consequatur
+                ad excepturi aliquid laboriosam ipsam harum, sunt molestiae quis?</p>
+        </div>
+
+        <div class="testimonial" style="background: #fed8b1;">
+            <img src="{% static 'img/person-2.jpg'  %}" alt="Jhanavi">
+            <p style="color: black;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga aliquid tempore distinctio excepturi quod consequatur sed asperiores consequuntur quia rem qui non, eligendi numquam reiciendis est repellendus! Eos, est laudantium consequatur
+                ad excepturi aliquid laboriosam ipsam harum, sunt molestiae quis?</p>
+        </div>
+
+       
+    </div>
+</section>
+
+{% endblock %}
